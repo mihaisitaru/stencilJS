@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StencilJS - Web Components</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="components/modal.js"></script>
+    <script src="components/tooltip.js"></script>
+    <script src="components/confirm-link.js"></script>
+    <script src="components/show-more-info.js"></script>
+</head>
+
+<body>
+    <uc-modal>
+        <h3 slot="title">Modal Title</h3>
+        <p>First web component</p>
+    </uc-modal>
+    <p>Testing a
+        <eyes-tooltip text="Default text here!">tooltip</eyes-tooltip>!
+    </p>
+    <span>
+        <eyes-tooltip></eyes-tooltip>
+    </span>
+    <div>
+        <a is="confirm-link" href="https://google.com" target='blank'>Google</a>
+    </div>
+    <show-more-info is-visible="_isInfoVisible"></show-more-info>
+    <script src="script.js"></script>
+</body>
+
+</html>
