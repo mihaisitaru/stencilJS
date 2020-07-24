@@ -1,2 +1,2 @@
 const modal = document.querySelector('uc-modal');
-// setTimeout(() => { modal.open() }, 1500);
+// setTimeout(() => { modal.open() }, 5000);

@@ -4,17 +4,25 @@ class ShowMoreInfo extends HTMLElement {
         this.attachShadow({ mode: 'open' });
         this._showMoreInfoContainer;
         this._moreInfoText = 'More information!';
-        this._isInfoVisible = true;
+        this._isInfoVisible = false;
         this.shadowRoot.innerHTML = `
         <style>
+            :host {
+                background-color: lightgray;
+            }
+            :host(.more-info) {
+                background-color: var(--color-primary, #000);
+            }
             .show-button {
                 border-radius: 10px;
                 cursor: pointer;
-                box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.7);
+            }
+            ::slotted(.click-info) {
+                color: gray;
             }
         </style>
-            <div><button class="show-button">Show</button></div>
-            <div><slot>Click on the button to display more info!</slot></div>
+            <button class="show-button">Show</button>
+            <slot>Click the button!</slot>
         `;
         this._showInfoButton = this.shadowRoot.querySelector('.show-button');
         this._showInfoButton.addEventListener('click', this._showMoreInfoText.bind(this));

@@ -7,7 +7,7 @@
     <title>StencilJS - Web Components</title>
     <link rel="stylesheet" href="styles.css">
     <script src="components/modal.js"></script>
-    <script src="components/tooltip.js"></script>
+    <script src="components/eyes-tooltip.js"></script>
     <script src="components/confirm-link.js"></script>
     <script src="components/show-more-info.js"></script>
 </head>
@@ -26,7 +26,9 @@
     <div>
         <a is="confirm-link" href="https://google.com" target='blank'>Google</a>
     </div>
-    <show-more-info is-visible="_isInfoVisible"></show-more-info>
+    <show-more-info is-visible="_isInfoVisible" class="more-info">
+        <slot class="click-info">Click on the button to display more info!</slot>
+    </show-more-info>
     <script src="script.js"></script>
 </body>
 

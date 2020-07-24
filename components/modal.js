@@ -1,9 +1,9 @@
 class Modal extends HTMLElement {
-  constructor() {
-    super();
-    this.attachShadow({ mode: 'open' });
-    this.isOpen = false;
-    this.shadowRoot.innerHTML = `
+    constructor() {
+        super();
+        this.attachShadow({ mode: 'open' });
+        this.isOpen = false;
+        this.shadowRoot.innerHTML = `
         <style>
             #backdrop {
                 position: fixed;
@@ -83,60 +83,60 @@ class Modal extends HTMLElement {
             </section>
         </div>
     `;
-    const slots = this.shadowRoot.querySelectorAll('slot');
-    slots[1].addEventListener('slotchange', event => {
-      console.dir(slots[1].assignedNodes());
-    });
-    const backdrop = this.shadowRoot.querySelector('#backdrop');
-    const cancelButton = this.shadowRoot.querySelector('#cancel-btn');
-    const confirmButton = this.shadowRoot.querySelector('#confirm-btn');
-    backdrop.addEventListener('click', this._cancel.bind(this));
-    cancelButton.addEventListener('click', this._cancel.bind(this));
-    confirmButton.addEventListener('click', this._confirm.bind(this));
-    // cancelButton.addEventListener('cancel', () => {
-    //   console.log('Cancel inside the component');
-    // });
-  }
-
-  attributeChangedCallback(name, oldValue, newValue) {
-    if (this.hasAttribute('opened')) {
-      this.isOpen = true;
-      // this.shadowRoot.querySelector('#backdrop').style.opacity = 1;
-      // this.shadowRoot.querySelector('#backdrop').style.pointerEvents = 'all';
-      // this.shadowRoot.querySelector('#modal').style.opacity = 1;
-      // this.shadowRoot.querySelector('#modal').style.pointerEvents = 'all';
-    } else {
-      this.isOpen = false;
+        const slots = this.shadowRoot.querySelectorAll('slot');
+        slots[1].addEventListener('slotchange', event => {
+            console.dir(slots[1].assignedNodes());
+        });
+        const backdrop = this.shadowRoot.querySelector('#backdrop');
+        const cancelButton = this.shadowRoot.querySelector('#cancel-btn');
+        const confirmButton = this.shadowRoot.querySelector('#confirm-btn');
+        backdrop.addEventListener('click', this._cancel.bind(this));
+        cancelButton.addEventListener('click', this._cancel.bind(this));
+        confirmButton.addEventListener('click', this._confirm.bind(this));
+        // cancelButton.addEventListener('cancel', () => {
+        //   console.log('Cancel inside the component');
+        // });
     }
-  }
 
-  static get observedAttributes() {
-    return ['opened'];
-  }
-
-  open() {
-    this.setAttribute('opened', '');
-    this.isOpen = true;
-  }
-
-  hide() {
-    if (this.hasAttribute('opened')) {
-      this.removeAttribute('opened');
+    attributeChangedCallback(name, oldValue, newValue) {
+        if (this.hasAttribute('opened')) {
+            this.isOpen = true;
+            // this.shadowRoot.querySelector('#backdrop').style.opacity = 1;
+            // this.shadowRoot.querySelector('#backdrop').style.pointerEvents = 'all';
+            // this.shadowRoot.querySelector('#modal').style.opacity = 1;
+            // this.shadowRoot.querySelector('#modal').style.pointerEvents = 'all';
+        } else {
+            this.isOpen = false;
+        }
     }
-    this.isOpen = false;
-  }
 
-  _cancel(event) {
-    this.hide();
-    const cancelEvent = new Event('cancel', { bubbles: true, composed: true });
-    event.target.dispatchEvent(cancelEvent);
-  }
+    static get observedAttributes() {
+        return ['opened'];
+    }
 
-  _confirm() {
-    this.hide();
-    const confirmEvent = new Event('confirm');
-    this.dispatchEvent(confirmEvent);
-  }
+    open() {
+        this.setAttribute('opened', '');
+        this.isOpen = true;
+    }
+
+    hide() {
+        if (this.hasAttribute('opened')) {
+            this.removeAttribute('opened');
+        }
+        this.isOpen = false;
+    }
+
+    _cancel(event) {
+        this.hide();
+        const cancelEvent = new Event('cancel', { bubbles: true, composed: true });
+        event.target.dispatchEvent(cancelEvent);
+    }
+
+    _confirm() {
+        this.hide();
+        const confirmEvent = new Event('confirm');
+        this.dispatchEvent(confirmEvent);
+    }
 }
 
 customElements.define('uc-modal', Modal);
