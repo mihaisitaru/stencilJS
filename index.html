@@ -6,29 +6,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>StencilJS - Web Components</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="components/modal.js"></script>
     <script src="components/eyes-tooltip.js"></script>
     <script src="components/confirm-link.js"></script>
     <script src="components/show-more-info.js"></script>
+    <script src="components/sm-modal.js"></script>
 </head>
 
 <body>
-    <uc-modal>
-        <h3 slot="title">Modal Title</h3>
-        <p>First web component</p>
-    </uc-modal>
     <p>Testing a
         <eyes-tooltip text="Default text here!">tooltip</eyes-tooltip>!
     </p>
-    <span>
-        <eyes-tooltip></eyes-tooltip>
-    </span>
-    <div>
-        <a is="confirm-link" href="https://google.com" target='blank'>Google</a>
+    <div id="some-elements">
+        <span>
+            <eyes-tooltip></eyes-tooltip>
+        </span>
+        <div>
+            <a is="confirm-link" href="https://google.com" target='blank'>Google</a>
+        </div>
+        <show-more-info is-visible="_isInfoVisible" class="more-info">
+            <slot class="click-info">Click on the button to display more info!</slot>
+        </show-more-info>
     </div>
-    <show-more-info is-visible="_isInfoVisible" class="more-info">
-        <slot class="click-info">Click on the button to display more info!</slot>
-    </show-more-info>
+    <button class="show-modal__button">Show the modal</button>
+    <sm-modal>
+        <h1 slot="title">The modal</h1>
+        <img src="https://i.pinimg.com/564x/a3/b1/73/a3b173f9653a78940161c08f92556fbf.jpg" />
+    </sm-modal>
     <script src="script.js"></script>
 </body>
 
